@@ -1,11 +1,18 @@
-gcloud auth login
-gcloud auth revoke
+default:
+  @just --list
+login:
+  gcloud auth login
+logout:
+  gcloud auth revoke
 
-gcloud projects create fibo-planner-cloud
-gcloud config set project fibo-planner-cloud
+projectname := "fibo-planner-cloud"
+create-project:
+  gcloud projects create {{ projectname }} 
+  gcloud config set project {{ projectname }}
 
-gcloud service enable run.googleapis.com
-gcloud service enable logging.googleapis.com
+enableservice:
+  gcloud service enable run.googleapis.com
+  gcloud service enable logging.googleapis.com
 
 gcloud config set run/region asia-southeast1
 

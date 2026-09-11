@@ -13,6 +13,7 @@ project_id := "fibo-planner"
 project_name := "Fibo Planner"
 region := "asia-southeast1"
 run_id := "fibo-planner"
+docker_image := "docker.io/siakhooi/fibo-planner:0.3.0"
 
 create-project:
   gcloud projects create "{{ project_id }}"  --name "{{ project_name }}"
@@ -24,14 +25,14 @@ link-billing billing_account:
 project-billing:
   gcloud billing projects describe "{{ project_id }}"
 set-region:
-  gcloud config set run/region ""{{ region }}
+  gcloud config set run/region "{{ region }}"
 enable-services:
   gcloud services enable run.googleapis.com
   gcloud services enable logging.googleapis.com
   gcloud services enable billingbudgets.googleapis.com
 
 cloud-run:
-  gcloud run deploy {{ run_id }} --image=docker.io/siakhooi/fibo-planner:0.3.0 --allow-unauthenticated --max-instances=1
+  gcloud run deploy {{ run_id }} --image="{{ docker_image }}" --allow-unauthenticated --max-instances=1
 
 describe-run:
   gcloud run services describe "{{ run_id }}" --region="{{ region }}"

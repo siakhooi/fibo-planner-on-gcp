@@ -13,7 +13,8 @@ project_id := "fibo-planner"
 project_name := "Fibo Planner"
 region := "asia-southeast1"
 run_id := "fibo-planner"
-docker_image := "docker.io/siakhooi/fibo-planner:0.3.0"
+docker_repository := "docker.io"
+docker_image := "siakhooi/fibo-planner:0.4.0-gcloud"
 
 create-project:
   gcloud projects create "{{ project_id }}"  --name "{{ project_name }}"
@@ -32,7 +33,7 @@ enable-services:
   gcloud services enable billingbudgets.googleapis.com
 
 cloud-run:
-  gcloud run deploy {{ run_id }} --image="{{ docker_image }}" --allow-unauthenticated --max-instances=1
+  gcloud run deploy {{ run_id }} --image="{{ docker_repository}}/{{ docker_image }}" --allow-unauthenticated --max-instances=1
 
 describe-run:
   gcloud run services describe "{{ run_id }}" --region="{{ region }}"
@@ -64,3 +65,12 @@ delete-run:
   gcloud run services delete {{ run_id }} --region="{{ region }}"
 delete-project:
   gcloud projects delete "{{ project_id }}"
+
+docker-build:
+  cd docker && docker build . -t {{ docker_image }}
+docker-run:
+  docker run -p 8080   {{ docker_image }}
+docker-login:
+  docker login -u siakhooi
+docker-push:
+  docker push {{ docker_image }}

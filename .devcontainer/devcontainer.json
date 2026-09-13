@@ -1,0 +1,18 @@
+{
+    "name": "fibo-planner-on-gcp",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "runArgs": [
+        "-v",
+        "/var/run/docker.sock:/var/run/docker.sock"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-azuretools.vscode-docker"
+            ]
+        }
+    },
+    "remoteUser": "root"
+}

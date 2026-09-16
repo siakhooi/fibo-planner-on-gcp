@@ -14,7 +14,7 @@ project_name := "Fibo Planner"
 region := "asia-southeast1"
 run_id := "fibo-planner"
 docker_repository := "docker.io"
-docker_image := "siakhooi/fibo-planner:0.4.0-gcloud"
+docker_image := "siakhooi/fibo-planner:0.5.0-gcloud"
 
 create-project:
   gcloud projects create "{{ project_id }}"  --name "{{ project_name }}"
@@ -69,7 +69,7 @@ delete-project:
 docker-build:
   cd docker && docker build . -t {{ docker_image }}
 docker-run:
-  docker run -p 8080   {{ docker_image }}
+  docker run -p 8080:8080   {{ docker_image }}
 docker-login:
   docker login -u siakhooi
 docker-push:

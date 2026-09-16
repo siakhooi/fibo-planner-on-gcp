@@ -3,6 +3,7 @@
     "build": {
         "dockerfile": "Dockerfile"
     },
+    "forwardPorts": [8080],
     "runArgs": [
         "-v",
         "/var/run/docker.sock:/var/run/docker.sock"

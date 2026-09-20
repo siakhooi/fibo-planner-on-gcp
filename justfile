@@ -1,42 +1,45 @@
 default:
   @just --list
-login:
-  gcloud auth login
-logout:
-  gcloud auth revoke
-project-list:
-  gcloud projects list
-billing-list:  
-  gcloud billing accounts list
 
 project_id := "fibo-planner"
 project_name := "Fibo Planner"
 region := "asia-southeast1"
 run_id := "fibo-planner"
 docker_repository := "docker.io"
-docker_image := "siakhooi/fibo-planner:0.5.0-gcloud"
+docker_image := "siakhooi/fibo-planner:0.6.0-gcloud"
+
+gcp-login:
+  gcloud auth login
+set-project:
+  gcloud config set project "{{ project_id }}"
+  gcloud config get-value project
+set-region:
+  gcloud config set run/region "{{ region }}"
+  gcloud config get-value 'run/region'
+cloud-run:
+  gcloud run deploy {{ run_id }} --image="{{ docker_repository}}/{{ docker_image }}" --allow-unauthenticated --max-instances=1
+describe-run:
+  gcloud run services describe "{{ run_id }}" --region="{{ region }}"
+
+gcp-logout:
+  gcloud auth revoke
+project-list:
+  gcloud projects list
+billing-list:  
+  gcloud billing accounts list
 
 create-project:
   gcloud projects create "{{ project_id }}"  --name "{{ project_name }}"
-default-project:
-  gcloud config set project "{{ project_id }}"
-  gcloud config get-value project
 link-billing billing_account:
   gcloud billing projects link "{{ project_id }}" --billing-account={{billing_account}}
 project-billing:
   gcloud billing projects describe "{{ project_id }}"
-set-region:
-  gcloud config set run/region "{{ region }}"
 enable-services:
   gcloud services enable run.googleapis.com
   gcloud services enable logging.googleapis.com
   gcloud services enable billingbudgets.googleapis.com
 
-cloud-run:
-  gcloud run deploy {{ run_id }} --image="{{ docker_repository}}/{{ docker_image }}" --allow-unauthenticated --max-instances=1
 
-describe-run:
-  gcloud run services describe "{{ run_id }}" --region="{{ region }}"
 run-log:
   gcloud run services logs read "{{ run_id }}" --region="{{ region }}"
 

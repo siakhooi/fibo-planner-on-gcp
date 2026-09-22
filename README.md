@@ -1,4 +1,4 @@
-# fibo-planner-on-gcp
+# fibo-planner on gcp
 repo to manage fibo-planner on google cloud platform
 
 ## Cloud run
@@ -25,3 +25,9 @@ repo to manage fibo-planner on google cloud platform
 - `$ just set-region`
 - `$ just cloud-run`
 - optionally, `$ just describe-run`
+
+
+## Badges
+
+[![Wise](https://img.shields.io/badge/Funding-Wise-33cb56.svg?logo=wise)](https://wise.com/pay/me/siakn3)
+![visitors](https://hit-tztugwlsja-uc.a.run.app/?outputtype=badge&counter=ghmd-fibo-planner-on-gcp)

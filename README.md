@@ -1,5 +1,5 @@
 # fibo-planner on gcp
-repo to manage fibo-planner on google cloud platform
+repo to manage fibo-planner (https://github.com/siakhooi/fibo-planner) on google cloud platform
 
 ## Cloud run
 
@@ -25,7 +25,6 @@ repo to manage fibo-planner on google cloud platform
 - `$ just set-region`
 - `$ just cloud-run`
 - optionally, `$ just describe-run`
-
 
 ## Badges
 

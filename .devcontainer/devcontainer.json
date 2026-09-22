@@ -1,19 +1,25 @@
 {
-    "name": "fibo-planner-on-gcp",
-    "build": {
-        "dockerfile": "Dockerfile"
-    },
-    "forwardPorts": [8080],
-    "runArgs": [
-        "-v",
-        "/var/run/docker.sock:/var/run/docker.sock"
-    ],
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "ms-azuretools.vscode-docker"
-            ]
-        }
-    },
-    "remoteUser": "root"
+  "name": "Gcloud Dev Container",
+  "image": "siakhooi/devcontainer:gcloud",
+  "remoteUser": "cloudsdk",
+  "containerUser": "cloudsdk",
+  "updateRemoteUserUID": true,
+  "forwardPorts": [8080],
+  "features": {},
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "lfm.vscode-makefile-term",
+        "yzhang.markdown-all-in-one",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  },
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  ],
+  "postStartCommand": "sudo chmod 666 /var/run/docker.sock || true",
+  "remoteEnv": {
+    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+  }
 }

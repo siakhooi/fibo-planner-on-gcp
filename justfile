@@ -6,7 +6,7 @@ project_name := "Fibo Planner"
 region := "asia-southeast1"
 run_id := "fibo-planner"
 docker_repository := "docker.io"
-docker_image := "siakhooi/fibo-planner:0.6.1-gcloud"
+docker_image := "siakhooi/fibo-planner:0.6.2-gcloud"
 
 gcp-login:
   gcloud auth login

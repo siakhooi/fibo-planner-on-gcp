@@ -1,4 +1,4 @@
-FROM siakhooi/fibo-planner:0.6.2
+FROM siakhooi/fibo-planner:0.7.0
 
 COPY custom-html/ /app/custom-html/
 
